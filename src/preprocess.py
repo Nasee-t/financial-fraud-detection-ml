@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 def load_and_preprocess_data(path):
-    df = pd.read_csv(path, nrows=500_000)
+    df = pd.read_csv(path, nrows=150_000)
 
     # Balance inconsistency (very common in fraud)
     df["balance_diff"] = df["oldbalanceOrg"] - df["newbalanceOrig"]
@@ -17,7 +17,7 @@ def load_and_preprocess_data(path):
                 ] + [col for col in df.columns if col.startswith("type_")]
     
     X = df[features]
-    y = df["isFraud"]  # keep numeric
+    y = df["isFraud"]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y

@@ -5,8 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 def train_logistic_regression(X_train, y_train):
     model = LogisticRegression(
         max_iter=300,
-        class_weight="balanced",
-        n_jobs=-1
+        class_weight="balanced"
     )
     model.fit(X_train, y_train)
     return model
@@ -17,7 +16,8 @@ def train_random_forest(X_train, y_train):
         n_estimators=200,
         class_weight="balanced",
         random_state=42,
-        n_jobs=-1
+        n_jobs=-1,
+        max_depth=10
     )
     model.fit(X_train, y_train)
     return model
