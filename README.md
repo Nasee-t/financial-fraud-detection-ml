@@ -57,7 +57,7 @@ EDA was performed to understand transaction behavior and fraud patterns.
 - Transaction type vs fraud analysis
 - Correlation analysis (numeric features only)
 
-📁 Notebook: `notebooks/fraud_detection.ipynb`
+📁 Notebook: [View Notebook](notebooks/fraud_detection.ipynb)
 
 ---
 
