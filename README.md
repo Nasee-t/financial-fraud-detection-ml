@@ -61,6 +61,30 @@ EDA was performed to understand transaction behavior and fraud patterns.
 
 ---
 
+## How to Run
+
+**1. Create a virtual environment**  
+```bash
+python -m venv venv
+```
+
+**2. Activate environment**  
+```bash
+venv\Scripts\activate
+```
+
+**3. Install dependencies**  
+```bash
+pip install -r requirements.txt
+```
+
+**4. Run training**  
+```bash
+python main.py
+```
+
+---
+
 ## Feature Engineering
 
 The following engineered features significantly improved model performance:
@@ -113,6 +137,20 @@ One-hot encoding for transaction types
 - Best balance between **precision and recall**  
 - Highest ROC-AUC  
 - Most effective fraud detection model
+
+---
+
+## 📦 Training Sample Sizes
+
+Different models were trained on different subsets of the dataset to balance performance and runtime:
+
+| Model                | Sample Size | Notes                                                                 |
+|----------------------|------------|----------------------------------------------------------------------|
+| Logistic Regression  | 500,000    | Baseline model for threshold tuning and initial experiments          |
+| Random Forest        | 150,000    | Used smaller sample to reduce training time due to tree complexity   |
+| XGBoost              | 300,000    | Balanced between performance and computational efficiency           |
+
+All experiments were performed on subsets due to the large dataset size (~6.3M transactions).  
 
 ---
 
