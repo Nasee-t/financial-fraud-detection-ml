@@ -3,17 +3,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 def load_and_preprocess_data(path):
-    df = pd.read_csv(path, nrows=150_000)
+    df = pd.read_csv(path, nrows=300_000)
 
     # Balance inconsistency (very common in fraud)
-    df["balance_diff"] = df["oldbalanceOrg"] - df["newbalanceOrig"]
+    df["balance_inconsistency"] = df["oldbalanceOrg"] - df["newbalanceOrig"] - df["amount"]
+
+    df["dest_balance_inconsistency"] = df["newbalanceDest"] - df["oldbalanceDest"] - df["amount"]
 
     # Transaction size relative to balance
     df["amount_ratio"] = df["amount"] / (df["oldbalanceOrg"] + 1)
 
     df = pd.get_dummies(df, columns=["type"], drop_first=True)
 
-    features = ["amount", "oldbalanceOrg", "newbalanceOrig", "balance_diff", "amount_ratio"
+    features = ["amount", "oldbalanceOrg", "newbalanceOrig", "balance_inconsistency", "dest_balance_inconsistency", "amount_ratio"
                 ] + [col for col in df.columns if col.startswith("type_")]
     
     X = df[features]
@@ -28,7 +30,7 @@ def load_and_preprocess_data(path):
         "amount",
         "oldbalanceOrg",
         "newbalanceOrig",
-        "balance_diff",
+        "balance_inconsistency",
         "amount_ratio"
     ]
 
